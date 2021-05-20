@@ -7,7 +7,13 @@ import User from './resolvers/User'
 import Post from './resolvers/Post'
 import Comment from './resolvers/Comment'
 
+import ITunesSearchAPI from './datasource'
+
 const pubsub = new PubSub()
+
+const dataSources = {
+  iTunesSearchAPI: new ITunesSearchAPI()
+}
 
 const server = new GraphQLServer({
   typeDefs: './src/schema.graphql',
@@ -17,11 +23,12 @@ const server = new GraphQLServer({
     Subscription,
     User,
     Post,
-    Comment
+    Comment,
   },
   context: {
     db,
-    pubsub
+    pubsub,
+    dataSources
   }
 })
 

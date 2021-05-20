@@ -1,9 +1,20 @@
+# ITunes
+
+type ITunesSearchResult {
+    id: String!
+    kind: String
+    trackId: String
+    trackName: String
+    artistId: String
+    artistName: String
+}
 type Query {
   users(query: String): [User!]!
   posts(query: String): [Post!]!
   comments: [Comment!]!
   me: User!
   post: Post!
+  iTunesSearch(term: String!): [ITunesSearchResult]
 }
 
 type Mutation {

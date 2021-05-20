@@ -40,6 +40,11 @@ const Query = {
       body: '',
       published: false
     }
+  },
+
+  iTunesSearch(_, { term }, { dataSources }) {
+    console.log("Data sources " + dataSources.iTunesSearchAPI)
+    dataSources.iTunesSearchAPI.getITunesSearchResult({ term })
   }
 }
 
