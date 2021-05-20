@@ -1,4 +1,4 @@
-# Modern GraphQL Tutorial
+# Hello GraphQL
 
 After this tutorial, you will be able to:
 
@@ -21,33 +21,10 @@ After this tutorial, you will be able to:
     - [Mutations](#mutations)
     - [Subscriptions](#subscriptions)
 
-## Introduction
-
-Before we start, let me give you a brief introduction to GraphQL. GraphQL is a _query language_ for API's. It is a more efficient alternative to traditional RESTful API's since it is:
-
-- **Faster** - with user-defined specification for data fetching, GraphQL prevents clients from underfetching or overfetching, making network requests more efficient.
-- **More Flexible** - user can define their own schemas and data types to share between frontend and backend.
-- **Faster Production** - with schemas acting as a contract for data fetching between the frontend team and backend team, both teams can do their individual work without further communication.
-
-An example would be: Say you are creating an Instagram-like app. When a user opens up the app, you want to show him the posts on his news feed, so you make a network request to your backend and fetch all the post data. As for the traditional RESTful API, you fetch the post data including the comments and details about the comments on the posts. However, that would be overfetching since the user may not necessarily click into individual posts to check comments. Here, GraphQL comes into play by letting you specify what kind of data you want and how many comments you want for each post. This not only limits the amount of data needed to transfer through the internet, it also speeds up the fetching efficiency and speed.
-
-In this tutorial, I will teach you how to set up your own GraphQL API, write a simple GraphQL client, and start communication between backend and frontend.
-
-I will be using [graphql-yoga](https://github.com/prisma/graphql-yoga) for the backend service, and [apollo](https://github.com/apollographql/react-apollo) for a simple client side.
-
 ## Getting Started
 
-Type the following steps into terminal to get started with this tutorial.
-
-```bash
-git clone https://github.com/ian13456/modern-graphql-tutorial.git
-
-cd modern-graphql-tutorial/backend
-
-yarn
-```
-
-I will walk you through each file later on and teach you what it's for.
+    npm install
+    npm start
 
 ## GraphQL Playground
 
@@ -471,3 +448,10 @@ mutation {
 - [GraphQL Introduction](https://medium.com/devgorilla/what-is-graphql-f0902a959e4)
 - [Modern GraphQL Course](https://www.udemy.com/graphql-bootcamp/)
 - [React Apollo](https://www.apollographql.com/docs/react/essentials/get-started)
+
+## Credit
+
+
+## Credit
+
+Tutorial modified from 'backend' of https://github.com/ian13456/modern-graphql-tutorial.git
