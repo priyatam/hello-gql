@@ -377,11 +377,11 @@ const post = {
 
 // THIS IS WHERE I PUBLISH MY DATA TO THE CHANNEL
  pubsub.publish('post', {
-        post: {
-          mutation: 'CREATED',
-          data: post
-        }
-      })
+    post: {
+      mutation: 'CREATED',
+      data: post
+    }
+  })
 ...
 ```
 
@@ -435,9 +435,6 @@ mutation {
 - [GraphQL Introduction](https://medium.com/devgorilla/what-is-graphql-f0902a959e4)
 - [Modern GraphQL Course](https://www.udemy.com/graphql-bootcamp/)
 - [React Apollo](https://www.apollographql.com/docs/react/essentials/get-started)
-
-## Credit
-
 
 ## Credit
 
