@@ -42,7 +42,6 @@ import Mutation from './resolvers/Mutation'
 import Subscription from './resolvers/Subscription'
 import User from './resolvers/User'
 import Post from './resolvers/Post'
-import Comment from './resolvers/Comment'
 
 // This will be covered later.
 const pubsub = new PubSub()
@@ -55,8 +54,7 @@ const server = new GraphQLServer({
     Mutation,
     Subscription,
     User,
-    Post,
-    Comment
+    Post
   },
   context: {
     db,
@@ -143,7 +141,6 @@ type User {
   email: String!
   age: Int
   posts: [Post!]!
-  comments: [Comment!]!
 }
 ```
 
@@ -297,13 +294,10 @@ With GraphQL Subscriptions, you can set up quote unquote "channels" on your endp
 ```graphql
 # backend/src/schema.graphql
 
-type Subscription {
-  comment(postId: ID!): CommentSubscriptionPayload!
-}
 
-type CommentSubscriptionPayload {
+type PostSubscriptionPayload {
   mutation: MutationType!
-  data: Comment!
+  data: Post!
 }
 
 enum MutationType {
@@ -341,8 +335,7 @@ const server = new GraphQLServer({
     Mutation,
     Subscription,
     User,
-    Post,
-    Comment
+    Post
   },
   context: {
     db,
@@ -359,15 +352,9 @@ However, the PubSub system isn't as easily set up as you thought. In order to se
 // backend/src/resolvers/Subscription.js
 
 const Subscription = {
-  comment: {
-    subscribe(parent, { postId }, { db, pubsub }, info) {
-      const post = db.posts.find((post) => post.id === postId && post.published)
-
-      if (!post) {
-        throw new Error('Post not found')
-      }
-
-      return pubsub.asyncIterator(`comment ${postId}`)
+  post: {
+    subscribe(parent, args, { pubsub }, info) {
+      return pubsub.asyncIterator('post')
     }
   }
 }
@@ -383,18 +370,18 @@ With the `pubsub` system set up, I can now broadcast data throughout all of my r
 // backend/src/resolvers/Mutation.js
 
 ...
-const comment = {
+const post = {
   id: uuidv4(),
   ...args.data
 }
 
 // THIS IS WHERE I PUBLISH MY DATA TO THE CHANNEL
-pubsub.publish(`comment ${args.data.post}`, {
-  comment: {
-    mutation: 'CREATED',
-    data: comment
-  }
-})
+ pubsub.publish('post', {
+        post: {
+          mutation: 'CREATED',
+          data: post
+        }
+      })
 ...
 ```
 
@@ -403,13 +390,13 @@ To sum up, here's a quick example of how GraphQL subscriptions work:
 ```graphql
 # subscription:
 subscription {
-  comment (postId: 10) {
+  post (id: 10) {
     mutation
     data {
-      text
-      author {
-        name
-      }
+      title
+      author
+      body 
+      
     }
   }
 }

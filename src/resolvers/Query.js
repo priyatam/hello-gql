@@ -23,9 +23,6 @@ const Query = {
       return isTitleMatch || isBodyMatch
     })
   },
-  comments(parent, args, { db }, info) {
-    return db.comments
-  },
   me() {
     return {
       id: '123098',

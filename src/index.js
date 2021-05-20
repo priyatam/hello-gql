@@ -5,7 +5,6 @@ import Mutation from './resolvers/Mutation'
 import Subscription from './resolvers/Subscription'
 import User from './resolvers/User'
 import Post from './resolvers/Post'
-import Comment from './resolvers/Comment'
 
 import ITunesSearchAPI from './datasource'
 
@@ -22,8 +21,7 @@ const server = new GraphQLServer({
     Mutation,
     Subscription,
     User,
-    Post,
-    Comment,
+    Post
   },
   context: {
     db,
