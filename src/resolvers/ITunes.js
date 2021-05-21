@@ -3,4 +3,4 @@ const ITunesQuery = {
     dataSources.iTunesSearchAPI.getITunesSearchResult({ term })
   }
 
-export { ITunesQuery as default }
+module.exports = ITunesQuery

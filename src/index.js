@@ -1,12 +1,12 @@
-import { GraphQLServer, PubSub } from 'graphql-yoga'
-import db from './db'
-import Query from './resolvers/Query'
-import Mutation from './resolvers/Mutation'
-import Subscription from './resolvers/Subscription'
-import User from './resolvers/User'
-import Post from './resolvers/Post'
+const { GraphQLServerLambda, PubSub } = require('graphql-yoga')
+const db  = require('./db')
+const Query = require('./resolvers/Query')
+const Mutation = require('./resolvers/Mutation')
+const Subscription = require('./resolvers/Subscription')
+const User = require('./resolvers/User')
+const Post = require('./resolvers/Post')
 
-import ITunesSearchAPI from './datasource'
+const ITunesSearchAPI = require('./datasource')
 
 const pubsub = new PubSub()
 
@@ -14,7 +14,7 @@ const dataSources = {
   iTunesSearchAPI: new ITunesSearchAPI()
 }
 
-const server = new GraphQLServer({
+const lambda = new GraphQLServerLambda({
   typeDefs: './src/schema.graphql',
   resolvers: {
     Query,
@@ -30,6 +30,5 @@ const server = new GraphQLServer({
   }
 })
 
-server.start({ port: process.env.PORT | 4000 }, () => {
-  console.log(`The server is up on port ${process.env.PORT | 4000}!`)
-})
+exports.server = lambda.graphqlHandler
+exports.playground = lambda.playgroundHandler

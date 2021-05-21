@@ -1,5 +1,5 @@
 //to make the GraphQL wrapper of the REST API, we need to work with the RESTDataSource class
-import { RESTDataSource } from 'apollo-datasource-rest'
+const { RESTDataSource } = require('apollo-datasource-rest')
 
 class ITunesSearchAPI extends RESTDataSource {
   constructor() {
@@ -38,4 +38,4 @@ class ITunesSearchAPI extends RESTDataSource {
   }
 }
 
-export { ITunesSearchAPI as default }
+module.exports = ITunesSearchAPI
