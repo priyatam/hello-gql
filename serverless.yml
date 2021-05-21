@@ -1,0 +1,25 @@
+# serverless.yml
+
+service: yoga-lambda-blog-demo
+provider:
+  name: aws
+  runtime: nodejs14.x
+functions:
+  graphql:
+    # this is formatted as <FILENAME>.<HANDLER>
+    handler: src/index.server
+    # this sets up API Gateway events for us. CORS allows sharing of resources from any origin 
+    # (typically requests from the browser must come from the same domain, i.e walmart.com cannot load data from amazon.com unless amazon.com allows it with CORS)
+    events:
+    - http:
+        path: graphql
+        method: post
+        cors: true
+  # host the playground on /get of the same path.      
+  playground:
+    handler: src/index.playground
+    events:
+    - http:
+        path: graphql
+        method: get
+        cors: true
